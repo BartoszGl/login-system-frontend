@@ -1,0 +1,17 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label for="email">Email: </label>
+  <input type="text" id="email" formControlName="email" placeholder="Email"><br><br>
+  <label for="password">Hasło: </label>
+  <input type="text" id="password" formControlName="password" placeholder="Hasło"><br><br>
+  <div class="field-message" *ngIf="password.errors?.isPasswordStrong.hasUpperCase">
+    Hasło musi mieć conajmniej jedną wielką literę
+  </div>
+  <div class="field-message" *ngIf="password.errors?.isPasswordStrong.hasNumeric">
+    Hasło musi mieć conajmniej jedną cyfrę
+  </div>
+  <div class="field-message" *ngIf="password.errors?.isPasswordStrong.hasSpecialChars">
+    Hasło musi mieć conajmniej jeden znak specjalny
+  </div>
+  <input type="submit" value="Zarejestruj się">
+</form>
+<p>Masz już konto? <a routerLink="/login">Zaloguj się tutaj</a></p>
