@@ -24,11 +24,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    //TODO: przygotować snack bar z ostrzeżeniem
     if (this.profileForm.invalid) {
       return;
     }
-    console.log(this.profileForm);
-    // this.userAccountService.registerUser()
+    this.userAccountService.registerUser(this.profileForm.value).subscribe(res => {
+      console.log(res)
+    })
   }
 
 }
