@@ -1,5 +1,10 @@
+import { AuthService } from './../shared/service/auth.service';
+import { SnackbarService } from './../shared/service/snackbar.service';
+import { UserAccountService } from './../shared/service/user-account.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { passwordValidator } from '../shared/directives/password-validator.directive'
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +14,32 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [passwordValidator()]),
   });
 
-  constructor() { }
+  constructor(private authService: AuthService, private snBarService: SnackbarService) { }
 
   ngOnInit(): void {
+  }
+
+  get password() {
+    return this.profileForm.get('password');
+  }
+
+  onSubmit() {
+
+    if (this.profileForm.invalid) {
+      return;
+    }
+
+    this.authService.login(this.profileForm.value).subscribe(res => {
+      let test = localStorage.getItem('id_token');
+      console.log(test);
+    }, (err: HttpErrorResponse) => {
+      let error: string[] = err.error
+      this.snBarService.display(error.join('\n'));
+    })
   }
 
 }

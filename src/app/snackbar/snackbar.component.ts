@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { SnackbarService } from './../shared/service/snackbar.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-snackbar',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SnackbarComponent implements OnInit {
 
-  constructor() { }
+  visible = false
+  message: string;
+
+  constructor(private snBarService: SnackbarService) {
+  }
 
   ngOnInit(): void {
+    this.snBarService.onAlert()
+      .subscribe((alertText: string) => {
+        this.visible = true;
+        this.message = alertText;
+      }
+      );
+
+  }
+
+  closeSnBar() {
+    this.visible = false;
   }
 
 }

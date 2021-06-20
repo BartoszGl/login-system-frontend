@@ -1,3 +1,4 @@
+import { SnackbarService } from './shared/service/snackbar.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserAccountService } from './shared/service/user-account.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +28,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserAccountService],
+  providers: [UserAccountService, SnackbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
