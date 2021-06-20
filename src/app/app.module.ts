@@ -1,5 +1,6 @@
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SnackbarService } from './shared/service/snackbar.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserAccountService } from './shared/service/user-account.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +29,11 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserAccountService, SnackbarService],
+  providers: [
+    UserAccountService,
+    SnackbarService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

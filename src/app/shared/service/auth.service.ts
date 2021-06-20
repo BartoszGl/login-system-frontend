@@ -1,7 +1,8 @@
+import { UserAccountService } from './user-account.service';
 import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { shareReplay, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
 
@@ -11,18 +12,27 @@ import { environment } from '../../../environments/environment'
   providedIn: 'root'
 })
 export class AuthService {
+  private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private userAccountService: UserAccountService) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user_data')));
+    this.user = this.userSubject.asObservable();
   }
 
   login(credentials: User): Observable<any> {
     return this.http.post<User>(`${environment.apiUrl}/api/login_check`, credentials).pipe(
-      tap(res => this.setSession(res)),
+      tap(res => this.setUser(res)),
       shareReplay())
   }
 
-  private setSession(authResult) {
+  public get userValue(): User {
+    return this.userSubject.value;
+  }
+
+  public setUser(authResult) {
+    this.userSubject.next(authResult.userData);
+    localStorage.setItem('user_data', JSON.stringify(authResult.userData))
     localStorage.setItem('id_token', authResult.token);
   }
 

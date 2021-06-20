@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.profileForm.value).subscribe(res => {
-      let test = localStorage.getItem('id_token');
-      console.log(test);
+      let test = localStorage.getItem('user_data');
+      console.log(this.authService.userValue);
     }, (err: HttpErrorResponse) => {
       let error: string[] = err.error
       this.snBarService.display(error.join('\n'));
