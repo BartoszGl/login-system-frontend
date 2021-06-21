@@ -4,41 +4,38 @@ import { AuthService } from './../service/auth.service';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
-
+import { getUrlScheme } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class VerifyEmailGuard implements CanActivate {
+
   constructor(
     private router: Router,
     private authService: AuthService
   ) { }
 
+
   canActivate(
     route: ActivatedRouteSnapshot, state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    const idToken = localStorage.getItem("id_token");
-    console.log('okkk');
-    if (!idToken) {
-      this.authService.logout({ returnUrl: state.url });
-      return false;
+    let params = new URLSearchParams();
+    for (let key in route.queryParams) {
+      params.set(key, route.queryParams[key])
     }
-    return this.checkAuthentication().then((res: User) => {
-      if (res && (route.data.roles.filter(Set.prototype.has, new Set(res.roles)).length > 0)) {
-        return true;
-      }
-      this.authService.logout({ returnUrl: state.url });
+    return this.checkAuthentication(params).then(res => {
       return false;
     }, err => {
       return false;
     });
   }
 
-  async checkAuthentication() {
-    const isAuthenticate = await this.authService.getUser().toPromise()
+  async checkAuthentication(params) {
+    // Implement your authentication in authService
+    const isAuthenticate = await this.authService.verifyEmail(params).toPromise()
     return isAuthenticate;
   }
+
 
 }

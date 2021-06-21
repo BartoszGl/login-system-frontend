@@ -10,11 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class UserProfileComponent implements OnInit {
 
   username: string;
+  isAdmin: boolean;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.username = this.authService.userValue.email;
+    this.isAdmin = this.authService.userValue.roles.includes("ROLE_ADMIN")
   }
 
   logout() {

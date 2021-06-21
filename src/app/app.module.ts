@@ -21,6 +21,7 @@ import { DropdownUserMenuComponent } from './dropdown-user-menu/dropdown-user-me
 import { AdminComponent } from './admin/admin.component';
 import { AdminCmsService } from './shared/service/admin-cms.service';
 import { TableComponent } from './table/table.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TableComponent } from './table/table.component';
     DropdownUserMenuComponent,
     AdminComponent,
     TableComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
 
     if (this.profileForm.invalid) {
+      this.snBarService.display('Please verify that credentials are correct')
       return;
     }
 

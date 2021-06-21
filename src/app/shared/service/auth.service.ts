@@ -47,12 +47,17 @@ export class AuthService {
       shareReplay())
   }
 
-  logout(queryParams?: Params) {
-    console.log(queryParams);
+  verifyEmail(params) {
+    return this.http.post(`${environment.apiUrl}/api/verify/email?${params.toString()}`, '');
+  }
+
+  logout(queryParams?: Params, navigateToLogin: boolean = true) {
     this.userSubject.next(null);
     localStorage.removeItem("id_token");
     localStorage.removeItem("user_data");
-    this.router.navigate(['/login'], { queryParams });
+    if (navigateToLogin) {
+      this.router.navigate(['/login'], { queryParams });
+    }
   }
 
   public isLoggedIn() {

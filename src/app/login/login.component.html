@@ -1,8 +1,10 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <label for="email">Email: </label>
-  <input type="text" id="email" formControlName="email" placeholder="Email"><br><br>
-  <label for="password">Hasło: </label>
-  <input type="text" id="password" formControlName="password" placeholder="Hasło"><br><br>
-  <input type="submit" value="Zaloguj się">
-</form>
-<p>Nie masz jeszcze konta? <a routerLink="/register">Zarejestruj się tutaj</a></p>
+<section class="centered">
+  <form class="centered" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <label for="email">Email: </label>
+    <input type="text" id="email" formControlName="email" placeholder="Email"><br><br>
+    <label for="password">Password: </label>
+    <input type="text" id="password" formControlName="password" placeholder="Password" type="password"><br><br>
+    <input type="submit" value="Sign in">
+  </form>
+  <p>Dont have an account yet? <a routerLink="/register">Sign up</a></p>
+</section>

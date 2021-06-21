@@ -1,0 +1,19 @@
+nav > ul{
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li a{
+  color: white;
+  background-color: #008CBA;
+  text-decoration: none;
+  padding:1rem
+
+}
+router-outlet{
+  margin: 3rem;
+}

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../shared/service/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,13 +11,14 @@ export class DropdownUserMenuComponent implements OnInit {
 
   username: string;
   openMenu = false;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = this.authService.userValue.email;
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout({}, false);
+    this.router.navigate(['/']);
   }
 }
