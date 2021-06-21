@@ -13,7 +13,6 @@ export class UserAccountService {
 
   }
 
-
   registerUser(data) {
     return this.http.post(`${environment.apiUrl}/api/register`, data)
   }

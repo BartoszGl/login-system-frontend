@@ -1,0 +1,47 @@
+:host {
+  --avatar-size: 70px;
+  /* change this value anything, e.g., 100px, 10rem, etc. */
+}
+
+.circle {
+  background-color: #ccc;
+  border-radius: 50%;
+  height: var(--avatar-size);
+  text-align: center;
+  width: var(--avatar-size);
+  cursor: pointer;
+  border: none;
+}
+.clickable{
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  background-color: #f1f1f1;
+  top:var(--avatar-size);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+section{
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.initials {
+  font-size: calc(var(--avatar-size) / 2);
+  line-height: 1;
+  position: relative;
+  top: calc(var(--avatar-size) / 4);
+}
+
+.dropdown-content * {
+  margin:5px;
+}

@@ -1,3 +1,5 @@
+import { UserNameExtrPipe } from './shared/pipes/user-name-extr.pipe';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SnackbarService } from './shared/service/snackbar.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -13,6 +15,13 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserFirstLetterPipe } from './shared/pipes/user-first-letter.pipe';
+import { DropdownUserMenuComponent } from './dropdown-user-menu/dropdown-user-menu.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminCmsService } from './shared/service/admin-cms.service';
+import { TableComponent } from './table/table.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +29,13 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     HomepageComponent,
     RegisterComponent,
     LoginComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    UserProfileComponent,
+    UserNameExtrPipe,
+    UserFirstLetterPipe,
+    DropdownUserMenuComponent,
+    AdminComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +47,9 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
   providers: [
     UserAccountService,
     SnackbarService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    AdminCmsService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

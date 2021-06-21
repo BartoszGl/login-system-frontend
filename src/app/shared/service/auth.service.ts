@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from "rxjs";
 import { shareReplay, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
+import { Params, Router } from '@angular/router';
 
 
 
@@ -15,14 +16,15 @@ export class AuthService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
-  constructor(private http: HttpClient, private userAccountService: UserAccountService) {
+  constructor(private http: HttpClient, private router: Router) {
+    console.log(localStorage.getItem('user_data'));
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user_data')));
     this.user = this.userSubject.asObservable();
   }
 
   login(credentials: User): Observable<any> {
     return this.http.post<User>(`${environment.apiUrl}/api/login_check`, credentials).pipe(
-      tap(res => this.setUser(res)),
+      tap(res => this.setUserToken(res)),
       shareReplay())
   }
 
@@ -30,14 +32,27 @@ export class AuthService {
     return this.userSubject.value;
   }
 
-  public setUser(authResult) {
-    this.userSubject.next(authResult.userData);
-    localStorage.setItem('user_data', JSON.stringify(authResult.userData))
+  setUserToken(authResult) {
     localStorage.setItem('id_token', authResult.token);
   }
 
-  logout() {
+  setUser(userData) {
+    this.userSubject.next(userData);
+    localStorage.setItem('user_data', JSON.stringify(userData))
+  }
+
+  getUser() {
+    return this.http.get(`${environment.apiUrl}/api/current-user`).pipe(
+      tap(res => this.setUser(res)),
+      shareReplay())
+  }
+
+  logout(queryParams?: Params) {
+    console.log(queryParams);
+    this.userSubject.next(null);
     localStorage.removeItem("id_token");
+    localStorage.removeItem("user_data");
+    this.router.navigate(['/login'], { queryParams });
   }
 
   public isLoggedIn() {

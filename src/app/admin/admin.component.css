@@ -1,0 +1,13 @@
+:host{
+  display: flex;
+  flex-direction: column;
+}
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  align-self: center;
+  width: 80%;
+  margin:20px;
+}

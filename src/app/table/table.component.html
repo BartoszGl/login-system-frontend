@@ -1,0 +1,10 @@
+<table>
+  <th *ngFor="let column of headers">
+    {{column}}
+  </th>
+  <tr *ngFor="let row of data">
+    <td *ngFor="let column of headers">
+      {{row[column]}}
+    </td>
+  </tr>
+</table>>

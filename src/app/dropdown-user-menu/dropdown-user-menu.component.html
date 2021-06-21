@@ -1,0 +1,12 @@
+<section>
+  <div class="circle clickable" (click)="openMenu = !openMenu">
+    <span class="initials">{{username|userFirstLetter}}</span>
+  </div>
+  <div class="dropdown-content" *ngIf="openMenu">
+    <div class="circle">
+      <span class="initials">{{username|userFirstLetter}}</span>
+    </div>
+    <p>{{username}}</p>
+    <button (click)="logout()">Wyloguj</button>
+  </div>
+</section>

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { passwordValidator } from '../shared/directives/password-validator.directive'
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [passwordValidator()]),
   });
 
-  constructor(private authService: AuthService, private snBarService: SnackbarService) { }
+  constructor(private authService: AuthService, private snBarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,8 +35,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.profileForm.value).subscribe(res => {
-      let test = localStorage.getItem('user_data');
-      console.log(this.authService.userValue);
+      this.router.navigate(['/profile']);
     }, (err: HttpErrorResponse) => {
       let error: string[] = err.error
       this.snBarService.display(error.join('\n'));
