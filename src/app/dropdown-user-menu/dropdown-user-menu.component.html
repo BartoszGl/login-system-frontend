@@ -1,11 +1,12 @@
 <section>
-  <div class="circle clickable" (click)="openMenu = !openMenu">
+  <div class="circle clickable" (click)="openMenu = !openMenu" title="Click here to toggle user details">
     <span class="initials">{{username|userFirstLetter}}</span>
   </div>
   <div class="dropdown-content" *ngIf="openMenu">
     <div class="circle">
       <span class="initials">{{username|userFirstLetter}}</span>
     </div>
+    <a routerLink="/profile">Navigate to profie</a>
     <p>{{username}}</p>
     <button (click)="logout()">Log out</button>
   </div>

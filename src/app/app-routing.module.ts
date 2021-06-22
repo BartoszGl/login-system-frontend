@@ -14,13 +14,22 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_USER', 'ROLE_ADMIN'] }
+    path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_USER', 'ROLE_ADMIN'], mustBeAuthenticated: [true] }
   },
   {
-    path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_ADMIN'] }
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ADMIN'], mustBeAuthenticated: [true] }
   },
   {
-    path: 'verify/email', component: VerifyEmailComponent, canActivate: [AuthGuard, VerifyEmailGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }
+    path: 'verify/email',
+    component: VerifyEmailComponent,
+    canActivate: [AuthGuard, VerifyEmailGuard],
+    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'], mustBeAuthenticated: [true, false] }
   }
 ];
 

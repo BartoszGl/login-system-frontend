@@ -1,3 +1,4 @@
+import { AuthService } from './../shared/service/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
-  constructor() { }
+  isUserLoggedIn = false;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.userValue) {
+      this.isUserLoggedIn = true;
+    }
   }
 
 }

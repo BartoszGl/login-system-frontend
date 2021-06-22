@@ -1,7 +1,8 @@
-<nav>
+<nav *ngIf="!isUserLoggedIn">
   <ul>
     <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
     <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
   </ul>
 </nav>
+<app-dropdown-user-menu *ngIf="isUserLoggedIn"></app-dropdown-user-menu>
 <h1>Hello Anonim!</h1>

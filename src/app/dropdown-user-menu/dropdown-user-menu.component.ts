@@ -19,6 +19,8 @@ export class DropdownUserMenuComponent implements OnInit {
 
   logout() {
     this.authService.logout({}, false);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/']);
   }
 }

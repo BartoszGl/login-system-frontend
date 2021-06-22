@@ -25,7 +25,7 @@ export class VerifyEmailGuard implements CanActivate {
       params.set(key, route.queryParams[key])
     }
     return this.checkAuthentication(params).then(res => {
-      return false;
+      return true;
     }, err => {
       return false;
     });
