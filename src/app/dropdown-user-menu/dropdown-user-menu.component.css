@@ -10,6 +10,7 @@
   text-align: center;
   width: var(--avatar-size);
   border: none;
+  object-fit: cover;
 }
 .clickable{
   cursor: pointer;
@@ -30,12 +31,12 @@ section{
   position: relative;
 }
 
-.initials {
+/* .initials {
   font-size: calc(var(--avatar-size) / 2);
   line-height: 1;
   position: relative;
   top: calc(var(--avatar-size) / 4);
-}
+} */
 
 .dropdown-content * {
   margin:5px;
