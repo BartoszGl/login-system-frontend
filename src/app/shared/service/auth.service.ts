@@ -1,4 +1,3 @@
-import { UserAccountService } from './user-account.service';
 import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

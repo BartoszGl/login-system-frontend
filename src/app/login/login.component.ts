@@ -1,6 +1,5 @@
 import { AuthService } from './../shared/service/auth.service';
 import { SnackbarService } from './../shared/service/snackbar.service';
-import { UserAccountService } from '../shared/service/user-register.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { passwordValidator } from '../shared/directives/password-validator.directive'
