@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
@@ -49,9 +49,11 @@ export class HttpErrorHandlerService {
   }
 
   private finalizeErrorHandling(): void {
+    console.log('tu jestem')
     this.snackBArService.display(this.message);
     this.route.queryParams
       .subscribe(params => {
+        console.log(params);
         this.authService.logout({ returnUrl: params.returnUrl });
       }
       );
