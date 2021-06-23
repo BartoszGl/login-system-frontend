@@ -1,9 +1,12 @@
+import { UserErrorHandlerService } from './shared/service/user-error-handler.service';
+import { HttpErrorHandlerService } from './shared/service/http-error-handler.service';
+
 import { UserNameExtrPipe } from './shared/pipes/user-name-extr.pipe';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SnackbarService } from './shared/service/snackbar.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UserAccountService } from './shared/service/user-account.service';
+import { UserRegisterService } from './shared/service/user-register.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,7 +40,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     DropdownUserMenuComponent,
     AdminComponent,
     TableComponent,
-    VerifyEmailComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,9 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     HttpClientModule
   ],
   providers: [
-    UserAccountService,
+    UserRegisterService,
+    HttpErrorHandlerService,
+    UserErrorHandlerService,
     SnackbarService,
     AdminCmsService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

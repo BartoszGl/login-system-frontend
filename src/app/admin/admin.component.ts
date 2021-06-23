@@ -12,6 +12,10 @@ export class AdminComponent implements OnInit {
   drawTable = false;
   constructor(private adminCmsService: AdminCmsService) { }
 
+  // Pobieram dane dotyczące userów,
+  // Nie unsubskrybuje, ponieważ robi za mnie to automatycznie async pipe
+  // https://angular.io/api/common/AsyncPipe
+
   ngOnInit(): void {
     this.adminCmsService.getUsers().subscribe((res: User[]) => {
       this.users = res;

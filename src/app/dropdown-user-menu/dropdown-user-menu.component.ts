@@ -17,8 +17,10 @@ export class DropdownUserMenuComponent implements OnInit {
     this.username = this.authService.userValue.email;
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout({}, false);
+
+    // W przypadku gdy jestem na tej samej route odświeżam stronę
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/']);

@@ -14,7 +14,6 @@ export class SnackbarService {
   }
 
   display(alertData) {
-    console.log(alertData);
     this.subject.next(alertData);
   }
 }

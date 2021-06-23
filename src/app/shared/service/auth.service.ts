@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from "rxjs";
 import { shareReplay, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 import { Params, Router } from '@angular/router';
 
 
@@ -25,7 +25,7 @@ export class AuthService {
   login(credentials: User): Observable<any> {
     return this.http.post<User>(`${environment.apiUrl}/api/login_check`, credentials).pipe(
       tap(res => this.setUserToken(res)),
-      shareReplay())
+      shareReplay());
   }
 
   public get userValue(): User {
@@ -38,13 +38,13 @@ export class AuthService {
 
   setUser(userData) {
     this.userSubject.next(userData);
-    localStorage.setItem('user_data', JSON.stringify(userData))
+    localStorage.setItem('user_data', JSON.stringify(userData));
   }
 
   getUser() {
-    return this.http.get(`${environment.apiUrl}/api/current-user`).pipe(
+    return this.http.get(`${environment.apiUrl}/api/user/current`).pipe(
       tap(res => this.setUser(res)),
-      shareReplay())
+      shareReplay());
   }
 
   verifyEmail(params) {
@@ -60,17 +60,4 @@ export class AuthService {
     }
   }
 
-  public isLoggedIn() {
-    // return moment().isBefore(this.getExpiration());
-  }
-
-  isLoggedOut() {
-    // return !this.isLoggedIn();
-  }
-
-  getExpiration() {
-    // const expiration = localStorage.getItem("expires_at");
-    // const expiresAt = JSON.parse(expiration);
-    // return moment(expiresAt);
-  }
 }

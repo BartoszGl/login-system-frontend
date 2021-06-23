@@ -1,4 +1,3 @@
-import { VerifyEmailGuard } from './shared/guards/verify-email.guard';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -28,7 +27,7 @@ const routes: Routes = [
   {
     path: 'verify/email',
     component: VerifyEmailComponent,
-    canActivate: [AuthGuard, VerifyEmailGuard],
+    canActivate: [AuthGuard],
     data: { roles: ['ROLE_ADMIN', 'ROLE_USER'], mustBeAuthenticated: [true, false] }
   }
 ];

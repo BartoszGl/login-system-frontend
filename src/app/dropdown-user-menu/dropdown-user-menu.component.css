@@ -9,7 +9,6 @@
   height: var(--avatar-size);
   text-align: center;
   width: var(--avatar-size);
-  cursor: pointer;
   border: none;
 }
 .clickable{
@@ -17,11 +16,7 @@
 }
 
 .dropdown-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
-  flex-direction: column;
   background-color: #f1f1f1;
   top:var(--avatar-size);
   min-width: 160px;

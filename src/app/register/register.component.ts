@@ -1,7 +1,8 @@
+import { RegisterResult } from './../shared/models/register-result';
 import { SnackbarService } from './../shared/service/snackbar.service';
-import { UserAccountService } from './../shared/service/user-account.service';
+import { UserRegisterService } from '../shared/service/user-register.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { passwordValidator } from '../shared/directives/password-validator.directive'
 import { HttpErrorResponse } from '@angular/common/http';
 @Component({
@@ -16,26 +17,26 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', [passwordValidator()]),
   });
 
-  constructor(private userAccountService: UserAccountService, private snBarService: SnackbarService) { }
+  constructor(private userRegisterService: UserRegisterService, private snBarService: SnackbarService) { }
 
   ngOnInit(): void {
   }
 
-  get password() {
+  get password(): AbstractControl {
     return this.profileForm.get('password');
   }
 
-  onSubmit() {
-
+  onSubmit(): void {
+    // Walidacja formularza rejestracyjnego
     if (this.profileForm.invalid) {
       this.snBarService.display('Please verify that credentials are correct')
       return;
     }
 
-    this.userAccountService.registerUser(this.profileForm.value).subscribe(res => {
+    this.userRegisterService.registerUser(this.profileForm.value).subscribe((res: RegisterResult) => {
+      this.snBarService.display(res.result);
     }, (err: HttpErrorResponse) => {
-      let error: string[] = err.error
-      this.snBarService.display(error.join('\n'));
+      // Błędy 401 i 403 są globalnie obsługiwane przez error interceptor
     })
   }
 

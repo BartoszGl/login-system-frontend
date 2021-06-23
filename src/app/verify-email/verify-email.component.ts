@@ -1,4 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/service/auth.service';
 
 @Component({
   selector: 'app-verify-email',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerifyEmailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let params = this.route.snapshot.queryParams;
+    let p = new URLSearchParams();
+    for (let key in params) {
+      p.set(key, params[key])
+    }
+
+    this.authService.verifyEmail(p).subscribe((res) => {
+      console.log(res);
+    })
+
   }
 
 }

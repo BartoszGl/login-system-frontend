@@ -3,7 +3,8 @@
     <label for="email">Email: </label>
     <input type="text" id="email" formControlName="email" placeholder="Email"><br><br>
     <label for="password">Password: </label>
-    <input type="text" id="password" formControlName="password" placeholder="Password" type="password"><br><br>
+    <input id="password" formControlName="password" placeholder="Password" type="password" name="password"
+      autocomplete="on"><br><br>
     <input type="submit" value="Sign in">
   </form>
   <p>Dont have an account yet? <a routerLink="/register">Sign up</a></p>

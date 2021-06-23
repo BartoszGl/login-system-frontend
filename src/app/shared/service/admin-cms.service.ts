@@ -9,7 +9,8 @@ export class AdminCmsService {
 
   constructor(private http: HttpClient) { }
 
+  //  Pobiera dane dotyczące maili i uprawnień wszystkich użytkowników.
   getUsers() {
-    return this.http.get(`${environment.apiUrl}/api/users-list`)
+    return this.http.get(`${environment.apiUrl}/api/admin/users`)
   }
 }
