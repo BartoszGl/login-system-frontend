@@ -1,4 +1,7 @@
-<nav>
+<input type="hidden" [routerLink]="'/'" routerLinkActive [routerLinkActiveOptions]="{exact: true}"
+  #home="routerLinkActive" />
+
+<nav *ngIf="!home.isActive">
   <ul>
     <li><a routerLink="/" routerLinkActive="active">Back to Home Page</a></li>
   </ul>

@@ -7,7 +7,9 @@
     (click)="openMenu = !openMenu">
   <div class="dropdown-content centered" *ngIf="openMenu">
     <img class="circle" src='../../assets/avatar.jpg' title="Click here to toggle user details">
-    <a routerLink="/profile">Navigate to profie</a>
+    <input type="hidden" [routerLink]="'/profile'" routerLinkActive [routerLinkActiveOptions]="{exact: true}"
+      #profile="routerLinkActive" />
+    <a routerLink="/profile" *ngIf="!profile.isActive">Navigate to profie</a>
     <p>{{username}}</p>
     <button (click)="logout()">Log out</button>
   </div>
