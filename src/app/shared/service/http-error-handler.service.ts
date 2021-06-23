@@ -49,7 +49,6 @@ export class HttpErrorHandlerService {
   }
 
   private finalizeErrorHandling(): void {
-    console.log('tu jestem')
     this.snackBArService.display(this.message);
     this.route.queryParams
       .subscribe(params => {
