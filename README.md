@@ -1,27 +1,20 @@
 # LoginSystemFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
+W celu uruchomienia wykonać:
 
-## Development server
+npm install
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+ng serve
 
-## Code scaffolding
+System został napisany z użyciem Angular.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Główne zabezpieczenia znajdują się w app/shared/guard oraz app/shared/interceptors
 
-## Build
+Główną specyfiką systemu jest to, że przy logowaniu użytkownika wydawany jest 
+JWT, przy każdej zmianie route z powodu bezpieczeństwa system pyta backend o dane dotyczące użytkownika - 
+jego email, uprawnienia, to czy jest zweryfikowany czy nie. Dzieje się tak, ponieważ niestety są specjalne programy do modyfikowania 
+local storage, weryfikując tożsamość użytkownika przy każdej zmianie route, mam pewność, że jest on zawsze tym za kogo się podaje
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+W przypadku gdy user jest adminem w widoku /profile pojawia się link do CMS, sam link do cms to /admin
+Konto admina nie może zostać utworzone z widoku /register.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
