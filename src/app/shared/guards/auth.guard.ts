@@ -27,6 +27,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
     return this.checkAuthentication().then((res: User) => {
+      console.log(route);
       if (this.userErrorHandlerService.handle(res, route)) {
         return false
       }

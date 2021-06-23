@@ -16,6 +16,7 @@ export class UserErrorHandlerService {
   constructor(private snackBarService: SnackbarService, private authService: AuthService) { }
 
   handle(user: User, route: ActivatedRouteSnapshot) {
+    this.message = '';
     this.user = user;
     this.route = route
 
@@ -23,7 +24,6 @@ export class UserErrorHandlerService {
     this.handleUnsufficientPrivileges();
     this.handleUserNotVerified();
 
-    console.log(this.message);
     if (this.message) {
       this.userLogout();
       return true;
@@ -39,12 +39,15 @@ export class UserErrorHandlerService {
   }
 
   private handleUserNotVerified(): void {
+    console.log(this.user.isVerified);
     if (!this.route.data.mustBeAuthenticated.includes(this.user.isVerified)) {
       this.message = "Please confirm your email before accessing this page, confirmation link was send to you via email";
     }
   }
 
   private handleUnsufficientPrivileges(): void {
+    console.log(this.route.data.roles);
+    console.log(this.user.roles);
     if (!(this.route.data.roles.filter(Set.prototype.has, new Set(this.user.roles)).length > 0)) {
       this.message = "You have unsufficient privileges to access this page";
     }
